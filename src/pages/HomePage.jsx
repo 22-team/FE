@@ -11,7 +11,7 @@ export function HomePage({ onNavigate }) {
   const [featuredSpecies, setFeaturedSpecies] = useState([]);
   const [topRecipes, setTopRecipes] = useState([]);
   const [refreshKey, setRefreshKey] = useState(Date.now());
-  
+
   // Load random 3 creatures for featured section
   useEffect(() => {
     const randomCreatures = getRandomCreatures(3);
@@ -21,7 +21,7 @@ export function HomePage({ onNavigate }) {
   // Load top recipes from database and refresh key on mount
   useEffect(() => {
     setRefreshKey(Date.now());
-    
+
     const loadTopRecipes = async () => {
       try {
         const data = await getRecipes({ limit: 50 });
@@ -43,9 +43,13 @@ export function HomePage({ onNavigate }) {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <div className="text-2xl">🌊</div>
-            <span className="font-bold" style={{ color: '#EA512E' }}>Ocean Food</span>
+            <img
+              src="/logo_2.png"
+              alt="wintercamp logo"
+              className="h-14 w-auto"
+            />
           </div>
+
         </div>
       </div>
 
@@ -58,7 +62,7 @@ export function HomePage({ onNavigate }) {
             바다를 지키고 건강도 챙겨요
           </p>
         </div>
-        
+
         {/* Key Features */}
         <div className="grid grid-cols-3 gap-3 mt-6">
           <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 text-center">
@@ -80,7 +84,7 @@ export function HomePage({ onNavigate }) {
       <div className="px-6 mt-6">
         <div className="flex items-center justify-between mb-4">
           <h3>인기 레시피</h3>
-          <button 
+          <button
             onClick={() => onNavigate('recipes')}
             className="flex items-center gap-1 text-sm"
             style={{ color: '#EA512E' }}
