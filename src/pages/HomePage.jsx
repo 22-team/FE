@@ -38,6 +38,7 @@ export function HomePage({ onNavigate }) {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#FFA07A]/20 to-white pb-20">
+
       {/* Header */}
       <div className="bg-white border-b border-gray-200 px-6 py-4 sticky top-0 z-10">
         <div className="flex items-center justify-between">
@@ -49,35 +50,16 @@ export function HomePage({ onNavigate }) {
               className="h-14 w-auto"
             />
           </div>
-
         </div>
       </div>
 
       {/* Hero Banner */}
-      <div className="bg-gradient-to-r from-[#EA512E] to-[#FF7A59] text-white px-6 pt-12 pb-8 rounded-b-[24px]">
-        <div className="text-center mb-6">
-          <h1 className="mb-4 text-white text-3xl">먹어서 없애자!</h1>
-          <p className="text-white/90 text-lg leading-relaxed">
-            해양 유해 생물을 맛있게 요리하여<br />
-            바다를 지키고 건강도 챙겨요
-          </p>
-        </div>
-
-        {/* Key Features */}
-        <div className="grid grid-cols-3 gap-3 mt-6">
-          <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 text-center">
-            <div className="text-2xl mb-2">🌊</div>
-            <p className="text-sm text-white">해양 생태계<br />보호</p>
-          </div>
-          <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 text-center">
-            <div className="text-2xl mb-2">🍽️</div>
-            <p className="text-sm text-white">맛있는<br />레시피</p>
-          </div>
-          <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4 text-center">
-            <div className="text-2xl mb-2">💪</div>
-            <p className="text-sm text-white">건강한<br />식생활</p>
-          </div>
-        </div>
+      <div className="w-full rounded-b-[24px] overflow-hidden">
+        <img
+          src="/banner.png"
+          alt="먹어서 없애자 배너"
+          className="w-full h-auto object-cover"
+        />
       </div>
 
       {/* Top Recipes */}
