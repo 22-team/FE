@@ -30,7 +30,7 @@ export function DetectPage({ onNavigate }) {
 
     try {
       const apiUrl = import.meta.env.VITE_API_URL;
-      
+
       if (apiUrl) {
         // 이미지를 base64로 인코딩
         const base64Image = await new Promise((resolve, reject) => {
@@ -43,7 +43,7 @@ export function DetectPage({ onNavigate }) {
           reader.onerror = reject;
           reader.readAsDataURL(file);
         });
-        
+
         // 백엔드 API 연결 (base64 JSON 전송)
         const response = await fetch(`${apiUrl}`, {
           method: 'POST',
@@ -54,15 +54,15 @@ export function DetectPage({ onNavigate }) {
             image_base64: base64Image,
           }),
         });
-        
+
         if (!response.ok) {
           throw new Error('API 요청 실패');
         }
-        
+
         const data = await response.json();
         const creatureName = data.name;
         const creature = getCreatureByName(creatureName);
-        
+
         if (creature) {
           setResult({
             isHarmful: true,
@@ -77,21 +77,21 @@ export function DetectPage({ onNavigate }) {
             isHarmful: false,
             species: creatureName || '알 수 없는 생물',
             confidence: Math.round((data.confidence || 0)),
-            description: '이 생물은 해양 유해생물이 아닙니다. 안심하세요!',
+            description: '이 생물은 바다를 살리는 식재료가 아닙니다. 안심하세요!',
           });
           setSelectedSpecies(null);
         }
       } else {
         // Mock API (백엔드 미연결 시)
         await new Promise(resolve => setTimeout(resolve, 2000));
-        
+
         const mockApiResponse = {
           creature_name: '군소'
         };
-        
+
         const creatureName = mockApiResponse.creature_name;
         const creature = getCreatureByName(creatureName);
-        
+
         if (creature) {
           setResult({
             isHarmful: true,
@@ -132,7 +132,7 @@ export function DetectPage({ onNavigate }) {
           <button onClick={() => onNavigate('home')} className="flex-shrink-0">
             <ArrowLeft className="w-6 h-6 text-gray-700" />
           </button>
-          <h2 className="text-xl">유해생물 판별기</h2>
+          <h2 className="text-xl">바다를 살리는 식재료 판별기</h2>
         </div>
 
         {/* Tabs */}
@@ -142,9 +142,8 @@ export function DetectPage({ onNavigate }) {
             className="relative pb-1"
           >
             <p
-              className={`text-[15px] ${
-                activeTab === 'upload' ? 'text-primary' : 'text-[#b2b2b2]'
-              }`}
+              className={`text-[15px] ${activeTab === 'upload' ? 'text-primary' : 'text-[#b2b2b2]'
+                }`}
             >
               사진 등록하기
             </p>
@@ -157,11 +156,10 @@ export function DetectPage({ onNavigate }) {
             className="relative pb-1"
           >
             <p
-              className={`text-[15px] ${
-                activeTab === 'info' ? 'text-primary' : 'text-[#b2b2b2]'
-              }`}
+              className={`text-[15px] ${activeTab === 'info' ? 'text-primary' : 'text-[#b2b2b2]'
+                }`}
             >
-              유해생물 정보
+              바다를 살리는 식재료 정보
             </p>
             {activeTab === 'info' && (
               <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-primary" />
@@ -249,17 +247,15 @@ export function DetectPage({ onNavigate }) {
             <div>
               <h3 className="mb-4">판별 결과</h3>
               <div
-                className={`rounded-3xl p-6 mb-6 ${
-                  result.isHarmful
+                className={`rounded-3xl p-6 mb-6 ${result.isHarmful
                     ? 'bg-gradient-to-br from-[#EA512E]/10 to-[#FF7A59]/10 border-2 border-primary'
                     : 'bg-gray-50 border-2 border-gray-300'
-                }`}
+                  }`}
               >
                 <div className="flex items-start gap-4 mb-4">
                   <div
-                    className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                      result.isHarmful ? 'bg-primary' : 'bg-green-500'
-                    }`}
+                    className={`w-12 h-12 rounded-full flex items-center justify-center ${result.isHarmful ? 'bg-primary' : 'bg-green-500'
+                      }`}
                   >
                     <Check className="w-6 h-6 text-white" />
                   </div>
